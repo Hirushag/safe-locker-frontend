@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceDataTable } from 'src/app/shared/models/device.model';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationUtilsService } from 'src/app/utils/notification-utils.service';
 import { CsvDataService } from 'src/app/services/csv-data.service';
+import {UserService} from '../../services/user.service';
 
 declare const $: any;
 
@@ -16,7 +16,7 @@ export class ViewUserComponent implements OnInit {
   public dataTable: DeviceDataTable;
 
   constructor(
-    private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private csvService: CsvDataService,
     private notificationUtils: NotificationUtilsService
@@ -26,23 +26,17 @@ export class ViewUserComponent implements OnInit {
     this.loadData();
     this.dataTable = {
       headerRow: [
-        'First Name',
-        'Last Name',
+        'Name',
         'Email',
-        'Address 1',
-        'Address 2',
-        'City',
-        'Contact',
+        'Username',
+        'Role',
         'Actions',
       ],
       footerRow: [
-        'First Name',
-        'Last Name',
+        'Name',
         'Email',
-        'Address 1',
-        'Address 2',
-        'City',
-        'Contact',
+        'Username',
+        'Role',
         'Actions',
       ],
       dataRows: [],
@@ -51,10 +45,10 @@ export class ViewUserComponent implements OnInit {
 
   loadData() {
     this.notificationUtils.showMainLoading();
-    this.authService.getUsersByRole().subscribe(
+    this.userService.getAllUsers().subscribe(
       (data) => {
         this.destroyDataTable();
-        this.dataTable.dataRows = data;
+        this.dataTable.dataRows = data.dataBundle;
         this.notificationUtils.hideMainLoading();
         this.initializeDataTable();
       },
@@ -92,7 +86,7 @@ export class ViewUserComponent implements OnInit {
       .then(
         () => {
           this.notificationUtils.showMainLoading();
-          this.authService.deleteUser(userId).subscribe(
+          this.userService.deleteUser(userId).subscribe(
             (data) => {
               this.notificationUtils.showSuccessMessage('User deleted.');
               this.notificationUtils.hideMainLoading();
@@ -127,13 +121,10 @@ export class ViewUserComponent implements OnInit {
 
       this.dataTable.dataRows.forEach((line) => {
         const csvLine = {
-          [this.dataTable.headerRow[0]]: line.firstName,
-          [this.dataTable.headerRow[1]]: line.lastName,
-          [this.dataTable.headerRow[2]]: line.email,
-          [this.dataTable.headerRow[3]]: line.address1,
-          [this.dataTable.headerRow[4]]: line.address2,
-          [this.dataTable.headerRow[5]]: line.country,
-          [this.dataTable.headerRow[6]]: line.contact,
+          [this.dataTable.headerRow[0]]: line.name,
+          [this.dataTable.headerRow[1]]: line.email,
+          [this.dataTable.headerRow[2]]: line.username,
+          [this.dataTable.headerRow[3]]: line.role,
         };
         items.push(csvLine);
       });

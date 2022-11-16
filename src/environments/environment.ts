@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   secret: 'iot-connect',
-  api_url: 'http://192.168.1.5:8080',
-  socket_url: 'http://localhost:8080',
+  // api_url: 'https://localhost:9091',
+  api_url: 'http://localhost:9091/api/v1',
+
 };
 
 /*

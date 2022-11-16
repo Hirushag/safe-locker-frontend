@@ -31,9 +31,9 @@ export const ROUTES: RouteInfo[] = [
     type: 'link',
     icontype: 'dashboard',
     collapse: 'dashboard',
-   
+
   },
-  
+
   {
     path: '/user',
     title: 'Users',
@@ -46,114 +46,19 @@ export const ROUTES: RouteInfo[] = [
       { path: 'edit', title: 'Edit Users', ab: 'EU', active: false },
     ],
   },
+
   {
-    path: '/reservation',
-    title: 'Reservation',
-    type: 'sub',
-    icontype: 'devices_other',
-    collapse: 'reservation',
-    children: [
-      { path: 'view', title: 'View reservation', ab: 'VR', active: true },
-      { path: 'create', title: 'Create reservation', ab: 'CR', active: true },
-      { path: 'reserve', title: 'Reserve', ab: 'RR', active: true},
-    ],
-  },
-  {
-    path: '/rooms',
-    title: 'Rooms',
-    type: 'sub',
-    icontype: 'room',
-    collapse: 'room',
-    children: [
-      { path: 'view', title: 'View Room', ab: 'VR', active: true },
-      { path: 'create', title: 'Create Room', ab: 'CR', active: true },
-      { path: 'edit', title: 'Edit Rooms', ab: 'ER', active: false },
-    ],
-  },
-  {
-    path: '/employee',
-    title: 'Employees',
-    type: 'sub',
-    icontype: 'supervised_user_circle',
-    collapse: 'Employee',
-    children: [
-      { path: 'view', title: 'View Employees', ab: 'VU', active: true },
-      { path: 'create', title: 'Create Employees', ab: 'CU', active: true },
-      { path: 'edit', title: 'Edit Employees', ab: 'EU', active: false },
-    ],
-  },
-  {
-    path: '/payment',
-    title: 'Payments',
-    type: 'sub',
-    icontype: 'payment',
-    collapse: 'payment',
-    children: [
-      { path: 'view', title: 'View Payments', ab: 'VP', active: true },
-      { path: 'create', title: 'Create Payments', ab: 'CP', active: true },
-      { path: 'edit', title: 'Edit Payments', ab: 'EP', active: false },
-    ],
-  },
-  {
-    path: '/salary',
-    title: 'Salaries',
-    type: 'sub',
-    icontype: 'polymer',
-    collapse: 'salary',
-    children: [
-      { path: 'view', title: 'View Salaries', ab: 'VS', active: true },
-      { path: 'create', title: 'Create Salaries', ab: 'CS', active: true },
-      { path: 'edit', title: 'Edit Salaries', ab: 'ES', active: false },
-    ],
-  },
-  {
-    path: '/stock',
-    title: 'Stocks',
+    path: '/upload-file',
+    title: 'Upload Files',
     type: 'sub',
     icontype: 'source',
-    collapse: 'stock',
+    collapse: 'upload-file',
     children: [
-      { path: 'view', title: 'View Stocks', ab: 'VS', active: true },
-      { path: 'create', title: 'Create Items', ab: 'CI', active: true },
-      { path: 'edit', title: 'Edit Items', ab: 'EI', active: false },
+      { path: 'view', title: 'View Files', ab: 'VF', active: true },
+      { path: 'create', title: 'Upload Files', ab: 'UF', active: true },
     ],
   },
-  {
-    path: '/supplier',
-    title: 'Suppliers',
-    type: 'sub',
-    icontype: 'person_search',
-    collapse: 'supplier',
-    children: [
-      { path: 'view', title: 'View Suppliers', ab: 'VS', active: true },
-      { path: 'create', title: 'Create Suppliers', ab: 'CS', active: true },
-      { path: 'edit', title: 'Edit suppliers', ab: 'ES', active: false },
-    ],
-  },
-  {
-    path: '/utility',
-    title: 'Utilities',
-    type: 'sub',
-    icontype: 'rss_feed',
-    collapse: 'utility',
-    children: [
-      { path: 'view', title: 'View Utilities', ab: 'VU', active: true },
-      { path: 'create', title: 'Create Utilities', ab: 'CU', active: true },
-      { path: 'edit', title: 'Edit Utilities', ab: 'EU', active: false },
-    ],
-  },
-  {
-    path: '/expenses',
-    title: 'Expenses',
-    type: 'sub',
-    icontype: 'euro_symbol',
-    collapse: 'expenses',
-    children: [
-      { path: 'view', title: 'View Expenses', ab: 'VE', active: true },
-      { path: 'create', title: 'Create Expenses', ab: 'CE', active: true },
-      { path: 'edit', title: 'Edit Expenses', ab: 'EE', active: false },
-    ],
-  },
+
 ];
 
 @Component({

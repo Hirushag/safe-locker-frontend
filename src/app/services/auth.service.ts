@@ -21,7 +21,9 @@ export class AuthService {
   registerUser(user) {
     return this.apiService.post('/user/', user);
   }
-
+  createUser(user) {
+    return this.apiService.post('/user/', user);
+  }
   registerEmployee(user) {
     return this.apiService.post('/user/', user);
   }

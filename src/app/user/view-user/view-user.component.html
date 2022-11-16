@@ -21,10 +21,8 @@
                                         <th>{{ dataTable.headerRow[2] }}</th>
                                         <th>{{ dataTable.footerRow[3] }}</th>
                                         <th>{{ dataTable.footerRow[4] }}</th>
-                                        <th>{{ dataTable.footerRow[5] }}</th>
-                                        <th>{{ dataTable.footerRow[6] }}</th>
-                                        <th>{{ dataTable.footerRow[7] }}</th>
-                                      
+
+
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -34,27 +32,20 @@
                                         <th>{{ dataTable.headerRow[2] }}</th>
                                         <th>{{ dataTable.footerRow[3] }}</th>
                                         <th>{{ dataTable.footerRow[4] }}</th>
-                                        <th>{{ dataTable.footerRow[5] }}</th>
-                                        <th>{{ dataTable.footerRow[6] }}</th>
-                                        <th>{{ dataTable.footerRow[7] }}</th>
-                                      
+
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     <tr *ngFor="let row of dataTable.dataRows">
-                                        <td>{{ row.firstName }}</td>
-                                        <td>{{ row.lastName }}</td>
+                                        <td>{{ row.name }}</td>
                                         <td>{{ row.email }}</td>
-                                        <td>{{ row.address1 }}</td>
-                                        <td>{{ row.address2 }}</td>
-                                        <td>{{ row.country }}</td>
-                                        <td>{{ row.contact }}</td>
-                                        
+                                        <td>{{ row.username }}</td>
+                                        <td>{{ row.role.name }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-link btn-success btn-just-icon edit"><i
-                                                    class="material-icons" (click)="editUser(row.userId)">edit</i></a>
+                                                    class="material-icons" (click)="editUser(row.id)">edit</i></a>
                                             <a class="btn btn-link btn-danger btn-just-icon remove"
-                                                (click)="deleteUSer(row.userId)"><i class="material-icons">close</i></a>
+                                                (click)="deleteUSer(row.id)"><i class="material-icons">close</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -65,7 +56,7 @@
                         <button class="btn btn-success" (click)="saveAsCSV()">export Rport</button>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

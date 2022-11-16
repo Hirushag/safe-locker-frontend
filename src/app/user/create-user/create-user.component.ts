@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
-import { NotificationUtilsService } from 'src/app/utils/notification-utils.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {NotificationUtilsService} from 'src/app/utils/notification-utils.service';
+import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -11,34 +11,24 @@ import { Router } from '@angular/router';
 })
 export class CreateUserComponent implements OnInit {
   userForm: FormGroup;
-  userRoles = ['ADMIN', 'CUSTOMER'];
+  passwordError: boolean = false;
+  showSuccess: boolean = false;
 
   constructor(
-    private authService: AuthService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     private notificationUtils: NotificationUtilsService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
-      first_name: [null, [Validators.required]],
-      last_name: [null, [Validators.required]],
-      address1: [null],
-      address2: [null],
-      password: [0],
-      role: [null, [Validators.required]],
-      country: [null, [Validators.required]],
-      countryCode: [null, [Validators.required]],
-      contact: [
-        null,
-        [
-          Validators.required,
-          Validators.maxLength(10),
-          Validators.minLength(10),
-        ],
-      ],
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      confirmPassword: [null],
     });
   }
 
@@ -46,22 +36,34 @@ export class CreateUserComponent implements OnInit {
     return this.userForm.controls;
   }
 
+  checkPassword() {
+    // tslint:disable-next-line:triple-equals
+    if (this.user.password.value != this.user.confirmPassword.value) {
+      this.passwordError = true;
+      this.showSuccess = false;
+
+    } else {
+      this.passwordError = false;
+      this.showSuccess = true;
+
+    }
+  }
+
   createUser() {
+    this.checkPassword();
+
     this.notificationUtils.promptConfirmation().then(
       () => {
         this.notificationUtils.showMainLoading();
-        this.authService
-          .registerUser({
-            firstName: this.user.first_name.value,
-            lastName: this.user.last_name.value,
+        this.userService
+          .createUser({
+            name: this.user.name.value,
             email: this.user.email.value,
+            username: this.user.username.value,
             password: this.user.password.value,
-            address1: this.user.address1.value,
-            address2: this.user.address2.value,
-            country: this.user.country.value,
-            role: this.user.role.value,
-            countryCode: this.user.countryCode.value,
-            contact: this.user.contact.value,
+            role: {
+              id: 1
+            }
           })
           .subscribe(
             () => {
@@ -78,7 +80,8 @@ export class CreateUserComponent implements OnInit {
             }
           );
       },
-      () => {}
+      () => {
+      }
     );
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationUtilsService } from 'src/app/utils/notification-utils.service';
 import { StockService } from 'src/app/services/stock.service';
@@ -28,7 +27,7 @@ export class CreateItemComponent implements OnInit {
       itemName: [null, [Validators.required]],
       price: [null, [Validators.required]],
       quantity: [null,]
-      
+
     });
   }
 
@@ -41,7 +40,7 @@ export class CreateItemComponent implements OnInit {
       () => {
         this.notificationUtils.showMainLoading();
         this.stockService.registerItem({
-        
+
         "itemName": this.item.itemName.value,
         "price":this.item.price.value,
         "quantity": this.item.quantity.value,
