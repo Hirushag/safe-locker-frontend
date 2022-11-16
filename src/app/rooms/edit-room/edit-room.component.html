@@ -1,0 +1,84 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <form [formGroup]="roomform" (submit)="updateRoom()">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">add_box</i>S
+                            </div>
+                            <h4 class="card-title">Edit Rooms</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                               
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="roomName" placeholder="Room Name *"
+                                            formControlName="roomName">
+                                        <mat-error *ngIf="room.roomName.errors?.required">
+                                            Room name is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <mat-label>Select an option</mat-label>
+                                        <mat-select formControlName="roomType">
+                                        <mat-option>Select Room Type</mat-option>
+                                           <mat-option value="single">single</mat-option>
+                                          <mat-option value="double">double</mat-option>
+                                          <mat-option value="triple">triple</mat-option>
+                                         </mat-select>
+                                        
+                                        <mat-error *ngIf="room.roomType.errors?.required">
+                                            Room Type is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="price" placeholder="Price*"
+                                            formControlName="price">
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="number" matInput id="roomChildren" placeholder="Children *"
+                                            formControlName="roomChildren">
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="number" matInput id="roomAdults" placeholder="Adults *"
+                                            formControlName="roomAdults">
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="roomDescription" placeholder="Description"
+                                            formControlName="roomDescription">
+                                        
+                                    </mat-form-field>
+                                </div>
+                                
+                    
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <div class="form-check mr-auto">
+                            </div>
+                            <button mat-raised-button type="submit" [disabled]="roomform.invalid"
+                                class="btn btn-fill btn-success">Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <h4 class="card-title">Customer Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar"></div>
+                        <div class="material-datatables">
+                            <table id="dataTable" class="table table-striped table-no-bordered table-hover"
+                                cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>{{ dataTable.headerRow[0] }}</th>
+                                        <th>{{ dataTable.headerRow[1] }}</th>
+                                        <th>{{ dataTable.headerRow[2] }}</th>
+                                        <th>{{ dataTable.footerRow[3] }}</th>
+                                        <th>{{ dataTable.footerRow[4] }}</th>
+                                        <th>{{ dataTable.footerRow[5] }}</th>
+                                        <th>{{ dataTable.footerRow[6] }}</th>
+                                        <th>{{ dataTable.footerRow[7] }}</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>{{ dataTable.headerRow[0] }}</th>
+                                        <th>{{ dataTable.headerRow[1] }}</th>
+                                        <th>{{ dataTable.headerRow[2] }}</th>
+                                        <th>{{ dataTable.footerRow[3] }}</th>
+                                        <th>{{ dataTable.footerRow[4] }}</th>
+                                        <th>{{ dataTable.footerRow[5] }}</th>
+                                        <th>{{ dataTable.footerRow[6] }}</th>
+                                        <th>{{ dataTable.footerRow[7] }}</th>
+                                      
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr *ngFor="let row of dataTable.dataRows">
+                                        <td>{{ row.firstName }}</td>
+                                        <td>{{ row.lastName }}</td>
+                                        <td>{{ row.email }}</td>
+                                        <td>{{ row.address1 }}</td>
+                                        <td>{{ row.address2 }}</td>
+                                        <td>{{ row.country }}</td>
+                                        <td>{{ row.contact }}</td>
+                                        
+                                        <td class="text-center">
+                                            <a class="btn btn-link btn-success btn-just-icon edit"><i
+                                                    class="material-icons" (click)="editUser(row.userId)">edit</i></a>
+                                            <a class="btn btn-link btn-danger btn-just-icon remove"
+                                                (click)="deleteUSer(row.userId)"><i class="material-icons">close</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success" (click)="saveAsCSV()">export Rport</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

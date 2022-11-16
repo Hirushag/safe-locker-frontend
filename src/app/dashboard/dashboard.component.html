@@ -1,0 +1,146 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons"></i>
+                        </div>
+                        <h4 class="card-title">Global Locations by Top Locations</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="content table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr *ngFor="let row of worldMapData.dataRows">
+                                                <td>
+                                                    <div class="flag">
+                                                        <img src="./assets/img/flags/{{row.countryCode}}.png" alt="">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {{row.country}}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{row.total}}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{row.percentage}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ml-auto mr-auto">
+                                <div id="worldMap" class="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-rose" data-header-animation="true">
+                        <div class="ct-chart" id="websiteViewsChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                <i class="material-icons">build</i> Fix Header!
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
+                                [matTooltipPosition]="'below'">
+                                <i class="material-icons">refresh</i>
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-default btn-link"
+                                matTooltip="Change Date" [matTooltipPosition]="'below'">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </div>
+                        <h4 class="card-title">Total Customers</h4>
+                        <p class="card-category">Total Customer Registrations</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-primary" data-header-animation="true">
+                        <div class="ct-chart" id="reservationChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-actions">
+                            <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                                <i class="material-icons">build</i> Fix Header!
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh"
+                                [matTooltipPosition]="'below'">
+                                <i class="material-icons">refresh</i>
+                            </button>
+                            <button mat-raised-button type="button" class="btn btn-default btn-link"
+                                matTooltip="Change Date" [matTooltipPosition]="'below'">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </div>
+                        <h4 class="card-title">Total Reservations</h4>
+                        <p class="card-category">Total Booking From The Applications</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">people_alt</i>
+                        </div>
+                        <p class="card-category">Customers</p>
+                        <h3 class="card-title">{{totalCustomers}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">local_offer</i>
+                            <a>Total number of customer.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">book_online</i>
+                        </div>
+                        <p class="card-category">Reservations</p>
+                        <h3 class="card-title">{{totalReservations}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">local_offer</i>
+                            <a>Total number of reservations.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <form [formGroup]="paymentform" (submit)="updatePayment()">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">add_box</i>S
+                            </div>
+                            <h4 class="card-title">Edit Payment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="date" matInput id="payDate" placeholder="Payment Date *"
+                                            formControlName="payDate">
+                                        <!-- <mat-error *ngIf="payment.payDate.errors?.required">
+                                            Payment date is <strong>required</strong>
+                                        </mat-error> -->
+                                    
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="customer_id" placeholder="Customer Id *"
+                                            formControlName="customer_id">
+                                        <mat-error *ngIf="payment.customer_id.errors?.required">
+                                            Room ID is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div> -->
+                                 <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="last_name" placeholder="Customer Id *"
+                                            formControlName="customerId">
+                                        <mat-error *ngIf="payment.customerId.errors?.required">
+                                            Customer Id is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div> 
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="customerName" placeholder="Customer Name *"
+                                            formControlName="customerName">
+                                        <mat-error *ngIf="payment.customerName.errors?.required">
+                                            Customer Name is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="amount" placeholder="Amount *"
+                                            formControlName="amount">
+                                        <mat-error *ngIf="payment.amount.errors?.required">
+                                            Amount is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                               <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="discount" placeholder="Discount*"
+                                            formControlName="discount">
+                                        <mat-error *ngIf="payment.discount.errors?.required">
+                                            Discount is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <mat-label>Select Payment Type</mat-label>
+                                          <mat-select formControlName="paymentType"placeholder="Payment Type">
+                                          <mat-option>Select Payment Type</mat-option>
+                                             <mat-option value="cash">Cash</mat-option>
+                                            <mat-option value="card">Card</mat-option>
+                                           </mat-select>
+                                       
+                                        
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="netPayment" placeholder="Net Payment*"
+                                            formControlName="netPayment">
+                                        
+                                       
+                                    </mat-form-field>
+                                </div>  -->
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <div class="form-check mr-auto">
+                            </div>
+                            <button mat-raised-button type="submit" [disabled]="paymentform.invalid"
+                                class="btn btn-fill btn-success">Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>

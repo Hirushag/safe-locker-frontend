@@ -1,0 +1,60 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <form [formGroup]="itemform" (submit)="createItem()">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">add_box</i>S
+                            </div>
+                            <h4 class="card-title">Create Item</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                            
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="first_name" placeholder="Item Name *"
+                                            formControlName="itemName">
+                                        <mat-error *ngIf="item.itemName.errors?.required">
+                                            Item Name is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="last_name" placeholder="Price *"
+                                            formControlName="price">
+                                        <mat-error *ngIf="item.price.errors?.required">
+                                            price is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class=" col-md-12 ">
+                                    <mat-form-field class="example-full-width has-label">
+                                        <input type="text" matInput id="quantity" placeholder="Quantity"
+                                            formControlName="quantity">
+                                        
+                                    </mat-form-field>
+                                </div>
+                                
+                    
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <div class="form-check mr-auto">
+                            </div>
+                            <button mat-raised-button type="submit" [disabled]="itemform.invalid"
+                                class="btn btn-fill btn-success">Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
