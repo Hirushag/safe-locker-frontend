@@ -13,9 +13,20 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  attemptLogin(credentials: Credential) {
+  attemptLogin(credentials: string) {
+    console.log(credentials);
     this.destroyAuth();
-    return this.apiService.get('/user/login', credentials);
+    return this.apiService.authenticate('authenticate', credentials);
+  }
+
+  OTPRequest() {
+    return this.apiService.post('/users/otp-request', null);
+  }
+
+  OTPSubmit(otp) {
+
+    console.log(otp);
+    return this.apiService.post('/users/otp-verified?otp=' + otp, null);
   }
 
   registerUser(user) {
@@ -38,7 +49,6 @@ export class AuthService {
 
   editUser(userId, user) {
     return this.apiService.put('/user/' + userId, user);
-    //return this.apiService.put('/user/user/{ userId }', user, { userId });
   }
 
   deleteUser(userId) {

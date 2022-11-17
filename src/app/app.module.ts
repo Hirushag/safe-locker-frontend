@@ -17,14 +17,6 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { NotificationUtilsService } from './utils/notification-utils.service';
 import { BlockUIModule } from 'ng-block-ui';
-import { RoomService } from './services/room.service';
-import { StockService } from './services/stock.service';
-import { PaymentService } from './services/payment.service';
-import { SupplierService } from './services/supplier.service';
-import { SalaryService } from './services/salary.service';
-import { EmployeeService } from './services/employee.service';
-import { UtilityService } from './services/utility.service';
-import { ReservationService } from './services/reservation.service';
 import { CsvDataService } from './services/csv-data.service';
 
 @NgModule({
@@ -45,15 +37,7 @@ import { CsvDataService } from './services/csv-data.service';
     JwtService,
     AuthService,
     MainApiService,
-    RoomService,
     NotificationUtilsService,
-    StockService,
-    PaymentService,
-    SupplierService,
-    SalaryService,
-    EmployeeService,
-    UtilityService,
-    ReservationService,
     CsvDataService,
   ],
   bootstrap: [AppComponent],

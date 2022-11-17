@@ -10,21 +10,31 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class MainApiService {
-  constructor(private httpClient: HttpClient, private jwtService: JwtService) {}
+  accessToken: string;
+  constructor(private httpClient: HttpClient, private jwtService: JwtService) {
+    this.accessToken = sessionStorage.getItem('accessToken')
+  }
 
   /**
    * Setting Headers for API Request
    */
   private setHeaders(): HttpHeaders {
     const headersConfig = {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + this.accessToken
+    };
+
+    return new HttpHeaders(headersConfig);
+  }
+
+  private setHeadersforAuthenticate(): HttpHeaders {
+    const headersConfig = {
+      'Content-Type': 'application/x-www-form-urlencoded',
       Accept: 'application/json',
       Authorization: ''
     };
-    // set auth token header
-    if (this.jwtService.getToken()) {
-      headersConfig.Authorization = `Bearer ${this.jwtService.getToken()}`;
-    }
+
     return new HttpHeaders(headersConfig);
   }
 
@@ -46,6 +56,19 @@ export class MainApiService {
         catchError(this.formatErrors)
       );
   }
+
+  authenticate(path, body, params?): Observable<any> {
+    return this.httpClient
+      .post(`${environment.authenticate_url}${path}`, body, {
+        headers: this.setHeadersforAuthenticate(),
+        params
+      })
+      .pipe(
+        map(res => res),
+        catchError(this.formatErrors)
+      );
+  }
+
 
   post(path, body, params?): Observable<any> {
     return this.httpClient

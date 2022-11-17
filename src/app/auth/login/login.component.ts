@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   private sidebarVisible: boolean;
   private nativeElement: Node;
   public dataModel: FormGroup;
+  ShowOtpField: boolean = false;
+  otp: any;
+  user: string;
 
   constructor(
     private element: ElementRef,
@@ -25,9 +28,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
     this.dataModel = this.formBuilder.group({
-      email: [
-        null,
-        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/),
+      username: [
+        null, [Validators.required]
       ],
       password: [null, [Validators.required, Validators.min(8)]],
     });
@@ -62,25 +64,41 @@ export class LoginComponent implements OnInit, OnDestroy {
     body.classList.remove('off-canvas-sidebar');
   }
 
+
+  OTPRequest() {
+    this.authService.OTPRequest().subscribe(data => {
+      console.log(data);
+
+      if(data.isSuccess == true){
+        this.ShowOtpField = true;
+      }
+    });
+  }
+
   login() {
+
+    const val = this.dataModel.value;
+    const body = new URLSearchParams();
+    body.set('username', val.username);
+    body.set('password', val.password);
     this.notificationUtils.showMainLoading('Authenticating....');
     this.authService
-      .attemptLogin({
-        email: this.dataModel.get('email').value,
-        password: this.dataModel.get('password').value,
-      })
+      .attemptLogin(body.toString())
       .subscribe(
         (data) => {
-          if (data.role === 'CUSTOMER') {
-            sessionStorage.setItem('role', data.role);
-            sessionStorage.setItem('customerId', data.userId);
-            this.router.navigateByUrl('/reservation/reserve');
+
+          console.log(data);
+          if (data) {
+            sessionStorage.removeItem('accessToken');
+            sessionStorage.setItem('accessToken', data.accessToken);
             this.notificationUtils.hideMainLoading();
+            this.OTPRequest();
+
             return;
           } else {
-            sessionStorage.setItem('role', data.role);
-            this.router.navigateByUrl('/dashboard/view');
-            this.notificationUtils.hideMainLoading();
+            this.notificationUtils.showErrorMessage(
+              'Invalid User Name OR Password'
+            );
           }
         },
         () => {
@@ -90,5 +108,29 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.notificationUtils.hideMainLoading();
         }
       );
+  }
+
+  submitOtp() {
+    console.log(this.otp);
+    this.notificationUtils.showMainLoading('Authenticating....');
+    this.authService.OTPSubmit(this.otp).subscribe(data => {
+
+      console.log(data);
+      // tslint:disable-next-line:triple-equals
+      if (data.isSuccess == true) {
+
+        sessionStorage.removeItem('user');
+        this.user =  JSON.stringify(data.dataBundle);
+        sessionStorage.setItem('user', this.user);
+        this.notificationUtils.hideMainLoading();
+        this.notificationUtils.showSuccessMessage('Login Success !!!');
+        // @ts-ignore
+        this.router.navigateByUrl('/user/view');
+
+      }
+
+    });
+
+
   }
 }

@@ -11,6 +11,7 @@ export interface RouteInfo {
   icontype: string;
   collapse?: string;
   children?: ChildrenItems[];
+
 }
 
 export interface ChildrenItems {
@@ -20,6 +21,7 @@ export interface ChildrenItems {
   type?: string;
   active: boolean;
 }
+
 
 // Menu Items
 export const ROUTES: RouteInfo[] = [
@@ -59,6 +61,18 @@ export const ROUTES: RouteInfo[] = [
     ],
   },
 
+  {
+    path: '/message',
+    title: 'Message',
+    type: 'sub',
+    icontype: 'source',
+    collapse: 'message',
+    children: [
+      // { path: 'view', title: 'View Files', ab: 'VF', active: true },
+      { path: 'create', title: 'Create Message', ab: 'CM', active: true },
+    ],
+  },
+
 ];
 
 @Component({
@@ -69,6 +83,7 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   ps: any;
   userName: any;
+  user: any;
 
   constructor() {}
 
@@ -80,31 +95,111 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('role') === 'CUSTOMER') {
+   this.user =  sessionStorage.getItem('user');
+   console.log(this.user);
+   this.user = JSON.parse(this.user);
+   console.log(this.user);
+
+   this.userName = this.user.role.name
+
+
+    if (this.user.role.name === 'ADMIN') {
       this.menuItems = [
         {
-          path: '/reservation',
-          title: 'Reservation',
+          path: '/upload-file',
+          title: 'Upload File',
           type: 'sub',
           icontype: 'devices_other',
-          collapse: 'reservation',
+          collapse: 'upload-file',
           children: [
             {
-              path: 'reserve',
-              title: 'reserve',
+              path: 'view',
+              title: 'View Uploaded File',
               ab: 'VR',
               active: true,
             },
             {
               path: 'create',
-              title: 'Create reservation',
+              title: 'Upload File',
               ab: 'CR',
-              active: false,
+              active: true,
             },
-            { path: 'edit', title: 'Edit reservation', ab: 'ER', active: false },
+            // { path: 'edit', title: 'Edit reservation', ab: 'ER', active: false },
+          ],
+        },
+        {
+          path: '/user',
+          title: 'Users',
+          type: 'sub',
+          icontype: 'devices_other',
+          collapse: 'user',
+          children: [
+            {
+              path: 'view',
+              title: 'View Users',
+              ab: 'VR',
+              active: true,
+            },
+            {
+              path: 'create',
+              title: 'Create Users',
+              ab: 'CR',
+              active: true,
+            },
+            // { path: 'edit', title: 'Edit reservation', ab: 'ER', active: false },
+          ],
+        },
+        {
+          path: '/message',
+          title: 'Message',
+          type: 'sub',
+          icontype: 'devices_other',
+          collapse: 'message',
+          children: [
+            // {
+            //   path: 'view',
+            //   title: 'View Message',
+            //   ab: 'VR',
+            //   active: true,
+            // },
+            {
+              path: 'create',
+              title: 'Create Message',
+              ab: 'CR',
+              active: true,
+            },
+            // { path: 'edit', title: 'Edit reservation', ab: 'ER', active: false },
           ],
         },
       ];
+    } else if(this.user.role.name === 'CLIENT') {
+
+      this.menuItems = [
+        {
+          path: '/message',
+          title: 'Message',
+          type: 'sub',
+          icontype: 'devices_other',
+          collapse: 'message',
+          children: [
+            {
+              path: 'view',
+              title: 'View Message',
+              ab: 'VR',
+              active: true,
+            },
+            {
+              path: 'create',
+              title: 'Create Message',
+              ab: 'CR',
+              active: true,
+            },
+            // { path: 'edit', title: 'Edit reservation', ab: 'ER', active: false },
+          ],
+        },
+      ];
+
+
     } else {
       this.menuItems = ROUTES.filter((menuItem) => menuItem);
     }

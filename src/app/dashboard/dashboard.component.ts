@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import moment = require('moment');
 import { AuthService } from '../services/auth.service';
-import { ReservationService } from '../services/reservation.service';
 import { NotificationUtilsService } from '../utils/notification-utils.service';
 declare const $: any;
 
@@ -15,7 +14,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private notificationUtils: NotificationUtilsService,
     private authService: AuthService,
-    private reservationService: ReservationService
   ) {}
   worldMapData: any = {};
   totalCustomers = 0;
@@ -23,7 +21,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserData();
-    this.loadReservationData();
   }
 
   loadUserData() {
@@ -77,54 +74,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  loadReservationData() {
-    this.notificationUtils.showMainLoading();
-    this.reservationService.getAllReservations().subscribe(
-      (data) => {
-        const reservations = [];
-        let totalReservation = 0;
-        const reservationLabels = [];
-        const reservationData = [];
-        data.forEach((reservation) => {
-          let isFound = false;
-          for (const res of reservations) {
-            if (
-              moment(res.checkIN).format('M') ===
-              moment(reservation.checkIN).format('M')
-            ) {
-              res.total += 1;
-              totalReservation += 1;
-              isFound = true;
-            }
-          }
-          if (!isFound) {
-            reservations.push({
-              checkIN: reservation.checkIN,
-              checkOut: reservation.checkOut,
-              total: 1,
-            });
-            totalReservation += 1;
-          }
-        });
-        reservations.forEach((reservation) => {
-          reservationLabels.push(moment(reservation.checkIN).format('M'));
-          reservationData.push(reservation.total);
-        });
-
-        this.createBarChart(
-          'reservationChart',
-          reservationLabels,
-          reservationData
-        );
-        this.totalReservations = totalReservation;
-        this.notificationUtils.hideMainLoading();
-      },
-      (error) => {
-        this.notificationUtils.showErrorMessage(error.message);
-        this.notificationUtils.hideMainLoading();
-      }
-    );
-  }
 
   createMap(data) {
     console.log(data);

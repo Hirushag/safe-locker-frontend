@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -30,8 +30,9 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule
-} from "@angular/material";
-import { MatDatepickerModule } from "@angular/material/datepicker";
+} from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 @NgModule({
   imports: [
@@ -65,7 +66,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+
   ],
   exports: [
     MatAutocompleteModule,
