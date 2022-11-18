@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   secret: 'iot-connect',
   // api_url: 'https://localhost:9091',
-  api_url: 'http://localhost:9091/api/v1',
-  authenticate_url: 'http://localhost:9091/',
+  api_url: 'https://localhost:9091/api/v1',
+  authenticate_url: 'https://localhost:9091/',
 
 };
 

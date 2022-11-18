@@ -12,7 +12,7 @@ import { throwError } from 'rxjs';
 export class MainApiService {
   accessToken: string;
   constructor(private httpClient: HttpClient, private jwtService: JwtService) {
-    this.accessToken = sessionStorage.getItem('accessToken')
+    this.accessToken = sessionStorage.getItem('accessToken');
   }
 
   /**
@@ -21,6 +21,16 @@ export class MainApiService {
   private setHeaders(): HttpHeaders {
     const headersConfig = {
       'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + this.accessToken
+    };
+
+    return new HttpHeaders(headersConfig);
+  }
+
+  private setHeadersMessage(): HttpHeaders {
+    const headersConfig = {
+      'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: 'Bearer ' + this.accessToken
     };
@@ -74,6 +84,18 @@ export class MainApiService {
     return this.httpClient
       .post(`${environment.api_url}${path}`, JSON.stringify(body), {
         headers: this.setHeaders(),
+        params
+      })
+      .pipe(
+        map(res => res),
+        catchError(this.formatErrors)
+      );
+  }
+
+  postMsg(path, body, params?): Observable<any> {
+    return this.httpClient
+      .post(`${environment.api_url}${path}`, JSON.stringify(body), {
+        headers: this.setHeadersMessage(),
         params
       })
       .pipe(

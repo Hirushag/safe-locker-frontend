@@ -27,4 +27,8 @@ export class UserService {
     return this.apiService.get('/user/user', { userId });
   }
 
+  submitMessage(message, username) {
+    return this.apiService.postMsg('/message/' + username, message);
+  }
+
 }

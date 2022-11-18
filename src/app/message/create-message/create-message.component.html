@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card">
+            <div class="card-header card-header-primary card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">add_box</i>S
+              </div>
+              <h4 class="card-title">Create Message</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+
+                <div class=" col-md-12 mt-4">
+                  <div class="fileUploader" >
+                    <textarea  type="textarea" style="width: 100%" [(ngModel)]="message" placeholder="Enter the message"></textarea>
+
+                  </div>
+
+
+                  <div class="card-footer text-right">
+                    <div class="form-check mr-auto">
+                    </div>
+                    <button (click)="submitMessage()" mat-raised-button type="submit"
+                            class="btn btn-fill btn-success">Submit
+                    </button>
+                  </div>
+
+<!--                  <div class="container" *ngIf="loading">-->
+<!--                    <h3>Loading ...</h3>-->
+<!--                  </div>-->
+                </div>
+
+              </div>
+            </div>
+            <!--            <div class="card-footer text-right">-->
+            <!--              <div class="form-check mr-auto">-->
+            <!--              </div>-->
+            <!--              <button mat-raised-button type="submit" [disabled]="itemform.invalid"-->
+            <!--                      class="btn btn-fill btn-success">Save-->
+            <!--              </button>-->
+            <!--            </div>-->
+
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
